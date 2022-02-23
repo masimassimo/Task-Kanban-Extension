@@ -1,0 +1,68 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="view_task_kanban_ext_inherit">
+      <field name="name">project.task.task_kanban_ext_inherit</field>
+      <field name="model">project.task</field>
+      <field name="inherit_id" ref="project.view_task_kanban"/>
+      <field name="arch" type="xml">
+        <xpath expr="//div[@name='date_deadline']" position="attributes">
+            <attribute name="attrs"></attribute>
+        </xpath>
+        <xpath expr="//div[@name='date_deadline']" position="after">
+            <field name="scadenza_precedente"/>
+        </xpath>
+        <xpath expr="//div[@class='o_kanban_record_bottom']" position="after">
+            <group attrs="{'invisible': [('first_recurrence_message', '=', False)]}">
+                <div style="color:green" role="status">
+                    <p><span class="fa fa-check-circle"/> Prossima Ricorrenza: <field name="first_recurrence_message" style="color:green"/></p>
+                </div>
+            </group>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="task_kanban_ext.action_window">
+      <field name="name">task_kanban_ext window</field>
+      <field name="res_model">task_kanban_ext.task_kanban_ext</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="task_kanban_ext.action_server">
+      <field name="name">task_kanban_ext server</field>
+      <field name="model_id" ref="model_task_kanban_ext_task_kanban_ext"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="task_kanban_ext" id="task_kanban_ext.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="task_kanban_ext.menu_1" parent="task_kanban_ext.menu_root"/>
+    <menuitem name="Menu 2" id="task_kanban_ext.menu_2" parent="task_kanban_ext.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="task_kanban_ext.menu_1_list" parent="task_kanban_ext.menu_1"
+              action="task_kanban_ext.action_window"/>
+    <menuitem name="Server to list" id="task_kanban_ext" parent="task_kanban_ext.menu_2"
+              action="task_kanban_ext.action_server"/>
+-->
+  </data>
+</odoo>
